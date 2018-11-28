@@ -18,10 +18,15 @@ public class CategorieService {
 	public Categorie find(Integer id) {
 		Optional<Categorie> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Object not found! Id: " 
-						+ id 
-						+ ", Type: " 
-						+ Categorie.class.getName()));
+				"Object not found! Id: " + id + ", Type: " + Categorie.class.getName()));
 
+	}
+
+
+
+
+	public Categorie insert(Categorie obj) {
+		obj.setId(null);
+	return repo.save(obj);
 	}
 }
