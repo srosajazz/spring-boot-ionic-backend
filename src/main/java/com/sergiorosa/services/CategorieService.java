@@ -22,11 +22,13 @@ public class CategorieService {
 
 	}
 
-
-
-
 	public Categorie insert(Categorie obj) {
 		obj.setId(null);
-	return repo.save(obj);
+		return repo.save(obj);
+	}
+
+	public Categorie update(Categorie obj) {
+		find(obj.getId());
+		return repo.save(obj);
 	}
 }
