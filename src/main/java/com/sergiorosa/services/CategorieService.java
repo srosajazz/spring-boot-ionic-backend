@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.sergiorosa.domain.Categorie;
 import com.sergiorosa.repositories.CategoryRepository;
 import com.sergiorosa.services.exceptions.ObjectNotFoundException;
+import org.springframework.dao.DataIntegrityViolationException;
 
 @Service
 public class CategorieService {
@@ -30,5 +31,16 @@ public class CategorieService {
 	public Categorie update(Categorie obj) {
 		find(obj.getId());
 		return repo.save(obj);
+	}
+
+	public void delete(Integer id) {
+		find(id);
+		try {
+			repo.deleteById(id);
+		}
+		catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityViolationException("Not possible to excluid a Category with produts");
+			
+		}
 	}
 }
