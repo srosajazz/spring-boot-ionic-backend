@@ -1,14 +1,15 @@
 package com.sergiorosa.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.sergiorosa.domain.Categorie;
 import com.sergiorosa.repositories.CategoryRepository;
 import com.sergiorosa.services.exceptions.ObjectNotFoundException;
-import org.springframework.dao.DataIntegrityViolationException;
 
 @Service
 public class CategorieService {
@@ -43,4 +44,10 @@ public class CategorieService {
 			
 		}
 	}
+	
+	public List<Categorie> findAll(){
+		return repo.findAll();
+	}
+	
+	
 }

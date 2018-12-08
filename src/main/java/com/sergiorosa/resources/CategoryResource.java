@@ -1,6 +1,8 @@
 package com.sergiorosa.resources;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +24,7 @@ public class CategoryResource {
 	private CategorieService service;
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<Categorie> find(@PathVariable Integer id) {
 		Categorie obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 
@@ -47,6 +49,13 @@ public class CategoryResource {
 		
 		service.delete(id);
 		return ResponseEntity.noContent().build();
+
+	}
+	
+	@RequestMapping(method=RequestMethod.GET)
+	public ResponseEntity<List<Categorie>> findAll() {
+		List<Categorie> list = service.findAll();
+		return ResponseEntity.ok().body(list);
 
 	}
 }
